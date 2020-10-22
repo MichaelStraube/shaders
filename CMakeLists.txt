@@ -23,11 +23,8 @@ add_executable(shaders
     src/mainwindow.ui
     src/glwidget.cpp
     src/glwidget.h
-    src/matrix.cpp
     src/matrix.h
-    src/starfield.cpp
     src/starfield.h
-    src/digitalrain.cpp
     src/digitalrain.h
     src/resources.qrc
 )

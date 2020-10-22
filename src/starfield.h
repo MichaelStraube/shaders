@@ -8,7 +8,11 @@ class Starfield : public GLWidget
 	Q_OBJECT
 
 public:
-	Starfield();
+	Starfield()
+	{
+		files.vertex = ":/shaders/vertex.vs";
+		files.fragment = ":/shaders/starfield.fs";
+	}
 };
 
 #endif // STARFIELD_H
