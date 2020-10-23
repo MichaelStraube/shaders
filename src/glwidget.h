@@ -25,8 +25,8 @@ private:
 	QOpenGLShaderProgram *program;
 	QTimer *timer;
 	QElapsedTimer *elapsedTimer;
-	QOpenGLTexture *texture0;
-	QOpenGLTexture *texture1;
+	QVector<QOpenGLTexture *> textures;
+	static constexpr int numTextures = 4; // iChannel0..3
 	unsigned int vbo;
 	unsigned int vao;
 	unsigned int ebo;

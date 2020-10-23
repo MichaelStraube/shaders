@@ -26,6 +26,7 @@ GLWidget::~GLWidget()
 
 	delete texture0;
 	delete texture1;
+
 	*/
 
 	f->glDeleteVertexArrays(1, &vao);
@@ -39,7 +40,7 @@ GLWidget::~GLWidget()
 
 void GLWidget::loadShaders()
 {
-	// build and compile our shader program
+	// Build and compile our shader program
 
 	vShader = new QOpenGLShader(QOpenGLShader::Vertex);
 	vShader->compileSourceFile(files.value("vertex"));
@@ -56,21 +57,20 @@ void GLWidget::loadShaders()
 
 void GLWidget::loadTextures()
 {
-	texture0 = new QOpenGLTexture(QImage(files.value("texture0")).mirrored());
-	texture0->setMinificationFilter(QOpenGLTexture::LinearMipMapLinear);
-	texture0->setMagnificationFilter(QOpenGLTexture::Linear);
-	texture0->setWrapMode(QOpenGLTexture::Repeat);
+	// Load our textures
 
-	texture1 = new QOpenGLTexture(QImage(files.value("texture1")).mirrored());
-	texture1->setMinificationFilter(QOpenGLTexture::LinearMipMapLinear);
-	texture1->setMagnificationFilter(QOpenGLTexture::Linear);
-	texture1->setWrapMode(QOpenGLTexture::Repeat);
+	for (int i = 0; i < numTextures; i++) {
+		textures.append(new QOpenGLTexture(QImage(files.value("texture" + QString::number(i))).mirrored()));
+		textures.last()->setMinificationFilter(QOpenGLTexture::LinearMipMapLinear);
+		textures.last()->setMagnificationFilter(QOpenGLTexture::Linear);
+		textures.last()->setWrapMode(QOpenGLTexture::Repeat);
 
-	program->setUniformValue("iChannel0", 0);
-	program->setUniformValue("iChannel1", 1);
+		QByteArray ba = QString("iChannel" + QString::number(i)).toLatin1();
+		program->setUniformValue(ba.data(), i);
 
-	program->setUniformValue("iChannelResolution[0]", texture0->width(), texture0->height(), 0.0);
-	program->setUniformValue("iChannelResolution[1]", texture1->width(), texture1->height(), 0.0);
+		ba = QString("iChannelResolution[" + QString::number(i) + "]").toLatin1();
+		program->setUniformValue(ba.data(), textures.last()->width(), textures.last()->height(), 0.0);
+	}
 }
 
 void GLWidget::initializeGL()
@@ -136,10 +136,16 @@ void GLWidget::paintGL()
 	program->setUniformValue("iTime", elapsed / 1000);
 
 	f->glActiveTexture(GL_TEXTURE0);
-	texture0->bind();
+	textures.at(0)->bind();
 
 	f->glActiveTexture(GL_TEXTURE1);
-	texture1->bind();
+	textures.at(1)->bind();
+
+	f->glActiveTexture(GL_TEXTURE2);
+	textures.at(2)->bind();
+
+	f->glActiveTexture(GL_TEXTURE3);
+	textures.at(3)->bind();
 
 	f->glBindVertexArray(vao);
 	f->glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
