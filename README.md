@@ -13,13 +13,12 @@ make
 You can skip through the shaders with the mouse wheel.
 
 ## Adding a new shader
-```
 - Add fragment shader and texture files
 - Add header file for the new effect
 - Add new effect to the effects enum in mainwindow.h
 - Add new case in MainWindow::setEffect()
 - Update CMakeLists.txt and resources.rc
-```
+
 See existing files for examples.
 
 ### Currently supported Shadertoy variables
