@@ -10,9 +10,9 @@ class Matrix : public GLWidget
 public:
 	Matrix()
 	{
-		files.vertex = ":/shaders/vertex.vs";
-		files.fragment = ":/shaders/matrix.fs";
-		files.texture0 = ":/images/matrix/0.png";
+		files["vertex"] = ":/shaders/vertex.vs";
+		files["fragment"] = ":/shaders/matrix.fs";
+		files["texture0"] = ":/images/matrix/0.png";
 	}
 };
 

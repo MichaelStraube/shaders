@@ -7,13 +7,6 @@
 #include <QElapsedTimer>
 #include <QOpenGLTexture>
 
-struct ShaderFiles {
-	QString vertex;
-	QString fragment;
-	QString texture0;
-	QString texture1;
-};
-
 // base class for effects
 
 class GLWidget : public QOpenGLWidget
@@ -24,7 +17,7 @@ public:
 	GLWidget();
 	~GLWidget();
 
-	ShaderFiles files;
+	QMap<QString, QString> files;
 
 private:
 	QOpenGLShader *vShader;
@@ -48,6 +41,5 @@ protected:
 	void resizeGL(int w, int h) override;
 	void paintGL() override;
 };
-
 
 #endif // GLWIDGET_H

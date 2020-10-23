@@ -42,10 +42,10 @@ void GLWidget::loadShaders()
 	// build and compile our shader program
 
 	vShader = new QOpenGLShader(QOpenGLShader::Vertex);
-	vShader->compileSourceFile(files.vertex);
+	vShader->compileSourceFile(files.value("vertex"));
 
 	fShader = new QOpenGLShader(QOpenGLShader::Fragment);
-	fShader->compileSourceFile(files.fragment);
+	fShader->compileSourceFile(files.value("fragment"));
 
 	program = new QOpenGLShaderProgram;
 	program->addShader(vShader);
@@ -56,12 +56,12 @@ void GLWidget::loadShaders()
 
 void GLWidget::loadTextures()
 {
-	texture0 = new QOpenGLTexture(QImage(files.texture0).mirrored());
+	texture0 = new QOpenGLTexture(QImage(files.value("texture0")).mirrored());
 	texture0->setMinificationFilter(QOpenGLTexture::LinearMipMapLinear);
 	texture0->setMagnificationFilter(QOpenGLTexture::Linear);
 	texture0->setWrapMode(QOpenGLTexture::Repeat);
 
-	texture1 = new QOpenGLTexture(QImage(files.texture1).mirrored());
+	texture1 = new QOpenGLTexture(QImage(files.value("texture1")).mirrored());
 	texture1->setMinificationFilter(QOpenGLTexture::LinearMipMapLinear);
 	texture1->setMagnificationFilter(QOpenGLTexture::Linear);
 	texture1->setWrapMode(QOpenGLTexture::Repeat);
