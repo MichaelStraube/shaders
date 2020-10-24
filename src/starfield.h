@@ -10,8 +10,8 @@ class Starfield : public GLWidget
 public:
 	Starfield()
 	{
-		files["vertex"] = ":/shaders/vertex.vs";
-		files["fragment"] = ":/shaders/starfield.fs";
+		files["vertex"] = ":/shaders/vertex.vert";
+		files["fragment"] = ":/shaders/starfield.frag";
 	}
 };
 

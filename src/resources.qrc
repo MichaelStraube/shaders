@@ -1,9 +1,9 @@
 <RCC>
 <qresource>
-	<file>../shaders/vertex.vs</file>
-	<file>../shaders/matrix.fs</file>
-	<file>../shaders/starfield.fs</file>
-	<file>../shaders/digitalrain.fs</file>
+	<file>../shaders/vertex.vert</file>
+	<file>../shaders/matrix.frag</file>
+	<file>../shaders/starfield.frag</file>
+	<file>../shaders/digitalrain.frag</file>
 	<file>../images/matrix/0.png</file>
 	<file>../images/digitalrain/0.png</file>
 	<file>../images/digitalrain/1.png</file>
