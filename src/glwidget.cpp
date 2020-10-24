@@ -1,6 +1,7 @@
 #include "glwidget.h"
 #include <QOpenGLFunctions_3_3_Core>
 #include <QMouseEvent>
+#include <QScreen>
 
 GLWidget::GLWidget()
 	: timer(new QTimer(this))
@@ -70,7 +71,7 @@ void GLWidget::loadTextures()
 		program->setUniformValue(ba.data(), i);
 
 		ba = QString("iChannelResolution[" + QString::number(i) + "]").toLatin1();
-		program->setUniformValue(ba.data(), textures.last()->width(), textures.last()->height(), 0.0);
+		program->setUniformValue(ba.data(), textures.last()->width(), textures.last()->height(), this->screen()->devicePixelRatio());
 	}
 }
 
@@ -131,7 +132,7 @@ void GLWidget::paintGL()
 
 	QOpenGLFunctions_3_3_Core *f = QOpenGLContext::currentContext()->versionFunctions<QOpenGLFunctions_3_3_Core>();
 
-	program->setUniformValue("iResolution", this->width(), this->height());
+	program->setUniformValue("iResolution", this->width(), this->height(), this->screen()->devicePixelRatio());
 	program->setUniformValue("iMouse", mousePos.x(), mousePos.y(), mousePos.z(), mousePos.w());
 
 	GLfloat elapsed = elapsedTimer->elapsed();

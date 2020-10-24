@@ -7,7 +7,7 @@
 #version 330 core
 in vec2 TexCoord;
 
-uniform vec2 iResolution;
+uniform vec3 iResolution;
 uniform float iTime;
 uniform vec3 iChannelResolution[2];
 uniform sampler2D iChannel0;

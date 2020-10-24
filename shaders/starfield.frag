@@ -3,7 +3,7 @@
  */
 
 #version 330 core
-uniform vec2 iResolution;
+uniform vec3 iResolution;
 uniform float iTime;
 
 vec2 hash22(vec2 p)
