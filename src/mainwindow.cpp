@@ -41,10 +41,6 @@ void MainWindow::wheelEvent(QWheelEvent *event)
 {
 	Q_UNUSED(event);
 
-	//QPoint numDegrees = event->angleDelta() / 8;
-
-	qDebug() << " wheelEvent";
-
 	effect++;
 	effect %= NumEffects;
 	setEffect();

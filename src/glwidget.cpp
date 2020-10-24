@@ -156,25 +156,21 @@ void GLWidget::paintGL()
 
 void GLWidget::mouseMoveEvent(QMouseEvent *event)
 {
-	//qDebug() << "MouseMoveEvent";
-
+	// left button down while moving
 	if (event->buttons() & Qt::LeftButton) {
-		//qDebug() << "MouseMoveEvent + left button down";
 		mousePos.setX(event->x());
-		mousePos.setY(this->height() - event->y());
+		mousePos.setY(this->height() - event->y() - 1); // bottom is 0
 	}
 }
 
 void GLWidget::mousePressEvent(QMouseEvent *event)
 {
-	//qDebug() << "MousePressEvent";
-
+	// left button pressed
 	if (event->buttons() & Qt::LeftButton) {
-		//qDebug() << "MousePressEvent + left button down
 		mousePos.setX(event->x());
-		mousePos.setY(this->height() - event->y());
+		mousePos.setY(this->height() - event->y() - 1);
 		mousePos.setZ(event->x());
-		mousePos.setW(this->height() - event->y());
+		mousePos.setW(this->height() - event->y() - 1);
 	}
 }
 
