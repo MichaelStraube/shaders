@@ -24,7 +24,7 @@ private:
 	enum {MATRIX, STARFIELD, DIGITALRAIN, NumEffects};
 	int effect;
 
-private:
+protected:
 	void wheelEvent(QWheelEvent *event) override;
 };
 
