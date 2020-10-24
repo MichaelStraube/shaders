@@ -26,6 +26,7 @@ See existing files for examples.
 uniform vec3         iResolution              // viewport resolution (in pixels)
 uniform float        iTime                    // shader playback time (in seconds)
 uniform vec3         iChannelResolution[4]    // channel resolution (in pixels)
+uniform vec4         iMouse                   // mouse pixel coords. xy: current (if MLB down), zw: click
 uniform samplerXX    iChannel0..3             // input channel. XX = 2D/Cube
 ```
 
