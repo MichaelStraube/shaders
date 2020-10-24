@@ -1,5 +1,6 @@
 #include "glwidget.h"
 #include <QOpenGLFunctions_3_3_Core>
+#include <QMouseEvent>
 
 GLWidget::GLWidget()
 	: timer(new QTimer(this))
@@ -131,6 +132,7 @@ void GLWidget::paintGL()
 	QOpenGLFunctions_3_3_Core *f = QOpenGLContext::currentContext()->versionFunctions<QOpenGLFunctions_3_3_Core>();
 
 	program->setUniformValue("iResolution", this->width(), this->height());
+	program->setUniformValue("iMouse", mousePos.x(), mousePos.y(), mousePos.z(), mousePos.w());
 
 	GLfloat elapsed = elapsedTimer->elapsed();
 	program->setUniformValue("iTime", elapsed / 1000);
@@ -149,6 +151,30 @@ void GLWidget::paintGL()
 
 	f->glBindVertexArray(vao);
 	f->glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+}
+
+void GLWidget::mouseMoveEvent(QMouseEvent *event)
+{
+	//qDebug() << "MouseMoveEvent";
+
+	if (event->buttons() & Qt::LeftButton) {
+		//qDebug() << "MouseMoveEvent + left button down";
+		mousePos.setX(event->x());
+		mousePos.setY(this->height() - event->y());
+	}
+}
+
+void GLWidget::mousePressEvent(QMouseEvent *event)
+{
+	//qDebug() << "MousePressEvent";
+
+	if (event->buttons() & Qt::LeftButton) {
+		//qDebug() << "MousePressEvent + left button down
+		mousePos.setX(event->x());
+		mousePos.setY(this->height() - event->y());
+		mousePos.setZ(event->x());
+		mousePos.setW(this->height() - event->y());
+	}
 }
 
 // SLOTS

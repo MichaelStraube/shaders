@@ -27,6 +27,7 @@ private:
 	QElapsedTimer *elapsedTimer;
 	QVector<QOpenGLTexture *> textures;
 	static constexpr int numTextures = 4; // iChannel0..3
+	QVector4D mousePos;
 	unsigned int vbo;
 	unsigned int vao;
 	unsigned int ebo;
@@ -40,6 +41,8 @@ protected:
 	void initializeGL() override;
 	void resizeGL(int w, int h) override;
 	void paintGL() override;
+	void mouseMoveEvent(QMouseEvent *event) override;
+	void mousePressEvent(QMouseEvent *event) override;
 };
 
 #endif // GLWIDGET_H
