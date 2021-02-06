@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.8)
+cmake_minimum_required(VERSION 3.11)
 
 project(shaders LANGUAGES CXX)
 
@@ -14,7 +14,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -O2")
 add_compile_options(-Wall -Wextra)
 
-find_package(Qt5 COMPONENTS Widgets REQUIRED)
+find_package(Qt6 COMPONENTS OpenGLWidgets REQUIRED)
 
 add_executable(shaders
     src/main.cpp
@@ -29,4 +29,4 @@ add_executable(shaders
     src/resources.qrc
 )
 
-target_link_libraries(shaders PRIVATE Qt5::Widgets)
+target_link_libraries(shaders PRIVATE Qt6::OpenGLWidgets)

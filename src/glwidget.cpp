@@ -1,5 +1,6 @@
 #include "glwidget.h"
 #include <QOpenGLFunctions_3_3_Core>
+#include <QOpenGLVersionFunctionsFactory>
 #include <QMouseEvent>
 #include <QScreen>
 
@@ -15,7 +16,7 @@ GLWidget::GLWidget()
 
 GLWidget::~GLWidget()
 {
-	QOpenGLFunctions_3_3_Core *f = QOpenGLContext::currentContext()->versionFunctions<QOpenGLFunctions_3_3_Core>();
+	auto *f = QOpenGLVersionFunctionsFactory::get<QOpenGLFunctions_3_3_Core>();
 
 	// Make sure the context is current before deleting resources
 	makeCurrent();
@@ -79,7 +80,7 @@ void GLWidget::initializeGL()
 {
 	// Load shaders, initialize vertex data, etc.
 
-	QOpenGLFunctions_3_3_Core *f = QOpenGLContext::currentContext()->versionFunctions<QOpenGLFunctions_3_3_Core>();
+	auto *f = QOpenGLVersionFunctionsFactory::get<QOpenGLFunctions_3_3_Core>();
 
 	loadShaders();
 
@@ -130,7 +131,7 @@ void GLWidget::paintGL()
 {
 	// Draw the scene
 
-	QOpenGLFunctions_3_3_Core *f = QOpenGLContext::currentContext()->versionFunctions<QOpenGLFunctions_3_3_Core>();
+	auto *f = QOpenGLVersionFunctionsFactory::get<QOpenGLFunctions_3_3_Core>();
 
 	program->setUniformValue("iResolution", this->width(), this->height(), this->screen()->devicePixelRatio());
 	program->setUniformValue("iMouse", mousePos.x(), mousePos.y(), mousePos.z(), mousePos.w());
@@ -158,8 +159,8 @@ void GLWidget::mouseMoveEvent(QMouseEvent *event)
 {
 	// left button down while moving
 	if (event->buttons() & Qt::LeftButton) {
-		mousePos.setX(event->x());
-		mousePos.setY(this->height() - event->y() - 1); // bottom is 0
+		mousePos.setX(event->position().x());
+		mousePos.setY(this->height() - event->position().y() - 1); // bottom is 0
 	}
 }
 
@@ -167,10 +168,10 @@ void GLWidget::mousePressEvent(QMouseEvent *event)
 {
 	// left button pressed
 	if (event->buttons() & Qt::LeftButton) {
-		mousePos.setX(event->x());
-		mousePos.setY(this->height() - event->y() - 1);
-		mousePos.setZ(event->x());
-		mousePos.setW(this->height() - event->y() - 1);
+		mousePos.setX(event->position().x());
+		mousePos.setY(this->height() - event->position().y() - 1);
+		mousePos.setZ(event->position().x());
+		mousePos.setW(this->height() - event->position().y() - 1);
 	}
 }
 
